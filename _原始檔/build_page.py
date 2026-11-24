@@ -1,20 +1,20 @@
-"""手機版煦暖曆落地頁 v6（2026-11-25）：結構照幹話曆新版落地頁（旅行 v28 規範的區塊順序），
+"""手機版煦暖曆落地頁 v7（2026-11-25）：結構照幹話曆新版落地頁（旅行 v28 規範的區塊順序），
 視覺語言換成 iPhone 介面（Widget 方塊、毛玻璃對話框、動態島、設定頁、鎖定畫面）。
 字一律思源黑體（手機版日曆規則）。產出 WORK/page.html，432 寬。"""
 import os, json
 HERE = os.path.dirname(os.path.abspath(__file__))
 WORK = '/private/tmp/claude-501/-Users-ningchang--claude-spares-spare-83sWsf/8be7a878-1d74-40b6-a934-3282ef5f9fed/scratchpad/work'
-V = 'v6'
+V = 'v7'
 
 P = [
-    dict(n='01', who='怕忘記撕的人', say='日曆好美好想買，<br>可是怕自己忘記撕', img='p1', w='p1_w', wpos='right:14px;bottom:14px',
-         nar='不用撕也不會忘，<mark>解鎖手機</mark>，<br>今天那一句已經換好。'),
+    dict(n='01', who='怕忘記撕的人', say='日曆好美好想買，<br>可是怕自己忘記撕？很浪費...', img='p1', w='p1_w', wpos='right:14px;bottom:14px', spos='max-width:310px',
+         nar='不用撕也不會忘，<mark>解鎖手機</mark>，<br>今天的日曆語錄都已更新好！'),
     dict(n='02', who='喜歡文字的人', say='每天都想讀到，<br>一句剛剛好的話', img='p2', w='p2_w', wpos='right:14px;bottom:14px',
-         nar='365 則作家語錄，<mark>滑開手機</mark><br>就讀得到今天那一句。'),
+         nar='365 則作家語錄，<mark>滑開手機</mark><br>剛好講中你那天的心情。'),
     dict(n='03', who='交換禮物', say='朋友在國外，<br>交換禮物寄不過去', img='p3', w='p3_w', wpos='left:14px;bottom:14px',
          nar='轉寄一封兌換碼就送到，<br>他每天<mark>解鎖手機</mark>都會想起你。'),
     dict(n='04', who='聖誕禮物', say='今年聖誕，<br>也想送自己一份禮物', img='p4', w='p4_w', wpos='right:14px;bottom:14px',
-         nar='一份<mark>每天都會打開</mark>的禮物，<br>陪你走過 2027。'),
+         nar='一份<mark>每天都會打開</mark>的禮物，<br>陪你走過 2027 的每一天。'),
 ]
 CAPS6 = ['<small>1 月 1 日</small>這會是美好的一年', '<small>2 月 14 日</small>愛是慢慢散步，慢慢喜歡你',
          '<small>3 月 21 日</small>我祝福我自己，這會是個美好的一年', '<small>9 月 28 日</small>真正的安全感是對自己的信任，允許自己脆弱',
@@ -36,11 +36,6 @@ h2 .u,.how h3 .u{background:linear-gradient(transparent 62%,rgba(201,109,69,.26)
 mark{color:var(--wine);font-weight:500;background:linear-gradient(transparent 60%,rgba(201,109,69,.2) 60%);padding:0 1px}
 .en{letter-spacing:.2em;font-weight:700}
 .shadow{box-shadow:0 10px 28px rgba(43,36,31,.13)}
-/* 動態島 */
-.island{display:flex;align-items:center;gap:10px;width:max-content;margin:20px auto 0;background:#000;color:#fff;border-radius:999px;padding:7px 18px 7px 7px;box-shadow:0 8px 20px rgba(0,0,0,.22)}
-.island img{width:34px;height:34px;border-radius:9px}
-.island .t{font-size:14.5px;font-weight:500;letter-spacing:.04em}
-.island .dot{width:7px;height:7px;border-radius:50%;background:#3DDC84;margin-left:4px;box-shadow:0 0 6px #3DDC84}
 /* 受眾卡 */
 .ac{position:relative;margin-top:34px}
 .ac .tag{position:relative;z-index:3;display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:#fff;border-radius:999px;padding:5px 16px 5px 5px;font-size:19px;font-weight:500;margin:0 0 -16px 10px;box-shadow:0 6px 14px rgba(0,0,0,.18)}
@@ -149,8 +144,7 @@ mark{color:var(--wine);font-weight:500;background:linear-gradient(transparent 60
 
 def s03():
     h = '''<section id="s03" class="alt"><div class="eb">誰適合手機版煦暖曆？</div>
-<h2>聖誕禮物 x 交換禮物<br><span class="u">送禮送到心坎裡</span></h2>
-<div class="island"><img src="img/lock_w.png"><span class="t">今天的那一句，已經換好了</span><i class="dot"></i></div>'''
+<h2>聖誕禮物 x 交換禮物<br><span class="u">送禮送到心坎裡</span></h2>'''
     for x in P:
         wd = f'<img class="wd" src="img/{x["w"]}.png" style="{x["wpos"]}">' if x['w'] else ''
         h += f'''<div class="ac"><div class="tag"><span class="no en">NO.{x['n']}</span>{x['who']}</div>
