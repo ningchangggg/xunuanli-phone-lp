@@ -1,18 +1,18 @@
-"""手機版煦暖曆落地頁 v5（2026-11-25）：結構照幹話曆新版落地頁（旅行 v28 規範的區塊順序），
+"""手機版煦暖曆落地頁 v6（2026-11-25）：結構照幹話曆新版落地頁（旅行 v28 規範的區塊順序），
 視覺語言換成 iPhone 介面（Widget 方塊、毛玻璃對話框、動態島、設定頁、鎖定畫面）。
 字一律思源黑體（手機版日曆規則）。產出 WORK/page.html，432 寬。"""
 import os, json
 HERE = os.path.dirname(os.path.abspath(__file__))
 WORK = '/private/tmp/claude-501/-Users-ningchang--claude-spares-spare-83sWsf/8be7a878-1d74-40b6-a934-3282ef5f9fed/scratchpad/work'
-V = 'v5'
+V = 'v6'
 
 P = [
     dict(n='01', who='怕忘記撕的人', say='日曆好美好想買，<br>可是怕自己忘記撕', img='p1', w='p1_w', wpos='right:14px;bottom:14px',
          nar='不用撕也不會忘，<mark>解鎖手機</mark>，<br>今天那一句已經換好。'),
     dict(n='02', who='喜歡文字的人', say='每天都想讀到，<br>一句剛剛好的話', img='p2', w='p2_w', wpos='right:14px;bottom:14px',
          nar='365 則作家語錄，<mark>滑開手機</mark><br>就讀得到今天那一句。'),
-    dict(n='03', who='交換禮物太多攤', say='交換禮物太多攤，<br>日曆都送光了', img='p3', w=None, wpos='', spos='left:auto;right:14px;top:22px;border-bottom-left-radius:22px;border-bottom-right-radius:6px',
-         nar='<mark>實體日曆拿去送人</mark>，<br>手機版留給自己。'),
+    dict(n='03', who='交換禮物', say='朋友在國外，<br>交換禮物寄不過去', img='p3', w='p3_w', wpos='left:14px;bottom:14px',
+         nar='轉寄一封兌換碼就送到，<br>他每天<mark>解鎖手機</mark>都會想起你。'),
     dict(n='04', who='聖誕禮物', say='今年聖誕，<br>也想送自己一份禮物', img='p4', w='p4_w', wpos='right:14px;bottom:14px',
          nar='一份<mark>每天都會打開</mark>的禮物，<br>陪你走過 2027。'),
 ]
@@ -149,8 +149,8 @@ mark{color:var(--wine);font-weight:500;background:linear-gradient(transparent 60
 
 def s03():
     h = '''<section id="s03" class="alt"><div class="eb">誰適合手機版煦暖曆？</div>
-<h2>聖誕禮物 x 交換禮物<br><span class="u">這一份，留給自己</span></h2>
-<div class="island"><img src="img/p3_w.png"><span class="t">今天的那一句，已經換好了</span><i class="dot"></i></div>'''
+<h2>聖誕禮物 x 交換禮物<br><span class="u">送禮送到心坎裡</span></h2>
+<div class="island"><img src="img/lock_w.png"><span class="t">今天的那一句，已經換好了</span><i class="dot"></i></div>'''
     for x in P:
         wd = f'<img class="wd" src="img/{x["w"]}.png" style="{x["wpos"]}">' if x['w'] else ''
         h += f'''<div class="ac"><div class="tag"><span class="no en">NO.{x['n']}</span>{x['who']}</div>

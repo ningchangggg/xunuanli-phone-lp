@@ -1,10 +1,10 @@
-"""把 WORK/sec/*.png 與 WORK/gif/enc 整理成交付資料夾（手機版煦暖曆 v5）。python3 deliver.py"""
+"""把 WORK/sec/*.png 與 WORK/gif/enc 整理成交付資料夾（手機版煦暖曆 v6）。python3 deliver.py"""
 import os, shutil, base64, io
 from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__))
 from build_page import WORK
 O = os.path.dirname(HERE)
-PRE = '11.25_手機版日曆_落地頁改版_v5'
+PRE = '11.25_手機版日曆_落地頁改版_v6'
 SEC = [('s03', '03_誰適合手機版煦暖曆', 0), ('s03b', '03b_聖誕夜買也來得及_金光_GIF', 1), ('s04', '04_數字列', 0),
        ('s05', '05_365天Widget牆', 0), ('s05a', '05a_解鎖手機就換好_GIF', 1), ('s06', '06_一張Widget拆解_6天輪播_GIF', 1),
        ('s06a', '06a_長按換尺寸_GIF', 1), ('s07', '07_上班出差午休都看得到_GIF', 1), ('s08', '08_一封信完成兌換_GIF', 1),
@@ -21,7 +21,7 @@ for sid, nm, g in SEC:
         Image.open(f'{WORK}/sec/{sid}.png').convert('RGB').save(f'{O}/說明圖_1080寬/{nm}.jpg', quality=90)
         names.append((sid, nm + '.jpg', g))
 head = ('<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-        '<title>手機版煦暖曆落地頁 v5</title><style>body{margin:0;background:#888}main{max-width:432px;margin:0 auto;background:#fff}img,video{display:block;width:100%}</style><main>')
+        '<title>手機版煦暖曆落地頁 v6</title><style>body{margin:0;background:#888}main{max-width:432px;margin:0 auto;background:#fff}img,video{display:block;width:100%}</style><main>')
 dyn = head + '\n'.join(f'<img src="說明圖_1080寬/{n}">' for _, n, _ in names) + '</main>'
 open(f'{O}/{PRE}_整頁預覽_動態.html', 'w').write(dyn)
 parts = []

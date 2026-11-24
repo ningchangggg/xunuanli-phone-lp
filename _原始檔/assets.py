@@ -1,7 +1,7 @@
-"""手機版煦暖曆落地頁 v5（2026-11-25）：產生頁面用的靜態素材 → img/
+"""手機版煦暖曆落地頁 v6（2026-11-25）：產生頁面用的靜態素材 → img/
 - Widget：印刷 PDF 重排（widgets.xw_widget），跟實體煦暖曆同一天同一頁
 - 受眾卡照片：手機版情境圖綠幕原圖重新合成，Widget 換成卡片上放大的那一天（手機裡跟放大卡同一天）
-- 交換禮物卡：IG 封面「實拍 875＋iPhone」第一格（實體與手機都是 2027 元旦）
+- 交換禮物卡（v6 改送人）：旅行曆綠幕原圖「飯店房間地圖」換成煦暖曆 5/20
 - 三種尺寸：phone_screen 的 iPhone 主畫面（小／中／大）
 python3 -E -P assets.py"""
 import os, sys, datetime, shutil, json
@@ -65,6 +65,7 @@ GREEN = os.path.join(ROOT, '99_系統工具/產品廣告圖工具/手機版情�
 # 受眾卡：(輸出名, 綠幕原圖, 手機裡那天, 裁切框中心偏移)
 CARDS = [('p1', '00_煦暖曆_S1_週一早餐窗邊.jpg', '4/17'),
          ('p2', '01_煦暖曆_S2_午後窗邊閱讀.jpg', '1/7'),
+         ('p3', '08_旅行曆_S3_飯店房間地圖.jpg', '5/20'),      # v6 交換禮物改送人：朋友在國外收到
          ('p4', '02_煦暖曆_S3_夜晚沙發毛毯.jpg', '12/25')]
 PIC_W, PIC_H = 960, 1000          # 卡片照片 384×400（2.5 倍）
 
@@ -79,13 +80,6 @@ def cards():
         compose_still(path, md, (x0, y0, cw, ch), (PIC_W, PIC_H)).save(os.path.join(IMG, f'{name}.jpg'), quality=90)
         save_widget(md, 340, f'{name}_w.png')
         print(name, md, (round(x0), round(y0), round(cw), round(ch)), flush=True)
-    # 03 交換禮物：IG 封面實拍 875＋iPhone（元旦），手機在右
-    src = os.path.join(ROOT, '01_廣告投放/手機版日曆/圖文/IG輪播_4比5/工作檔/封面單品情境/換頁/_test_無字.jpg')    # 無字版（frame_00 有烤進 IG 封面標題）
-    im = Image.open(src).convert('RGB'); print('875 frame', im.size)
-    w, h = im.size; cw = w; ch = cw * PIC_H / PIC_W                         # 全寬，上方多留牆面放對話框（不壓到日曆頂蓋）
-    x0 = 0; y0 = 135
-    im.crop((round(x0), round(y0), round(x0 + cw), round(y0 + ch))).resize((PIC_W, PIC_H), Image.LANCZOS).save(os.path.join(IMG, 'p3.jpg'), quality=90)
-    save_widget('1/1', 340, 'p3_w.png')
 
 WALL = ['1/1', '1/7', '1/12', '1/20', '2/3', '2/14', '2/25', '3/8', '3/21', '4/1', '4/17', '5/1', '5/20', '6/6',
         '6/21', '7/7', '7/16', '8/8', '8/26', '9/13', '9/21', '9/28', '10/10', '10/22', '11/11', '11/26', '12/25', '12/31']
