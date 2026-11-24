@@ -1,20 +1,20 @@
-"""手機版煦暖曆落地頁 v7（2026-11-25）：結構照幹話曆新版落地頁（旅行 v28 規範的區塊順序），
+"""手機版煦暖曆落地頁 v8（2026-11-25）：結構照幹話曆新版落地頁（旅行 v28 規範的區塊順序），
 視覺語言換成 iPhone 介面（Widget 方塊、毛玻璃對話框、動態島、設定頁、鎖定畫面）。
 字一律思源黑體（手機版日曆規則）。產出 WORK/page.html，432 寬。"""
 import os, json
 HERE = os.path.dirname(os.path.abspath(__file__))
 WORK = '/private/tmp/claude-501/-Users-ningchang--claude-spares-spare-83sWsf/8be7a878-1d74-40b6-a934-3282ef5f9fed/scratchpad/work'
-V = 'v7'
+V = 'v8'
 
 P = [
     dict(n='01', who='怕忘記撕的人', say='日曆好美好想買，<br>可是怕自己忘記撕？很浪費...', img='p1', w='p1_w', wpos='right:14px;bottom:14px', spos='max-width:310px',
-         nar='不用撕也不會忘，<mark>解鎖手機</mark>，<br>今天的日曆語錄都已更新好！'),
+         nar='不用撕也不會忘，<mark>解鎖手機</mark>，今天的日曆語錄都已更新好！'),
     dict(n='02', who='喜歡文字的人', say='每天都想讀到，<br>一句剛剛好的話', img='p2', w='p2_w', wpos='right:14px;bottom:14px',
-         nar='365 則作家語錄，<mark>滑開手機</mark><br>剛好講中你那天的心情。'),
+         nar='365 則作家語錄，<mark>滑開手機</mark>剛好講中你那天的心情。'),
     dict(n='03', who='交換禮物', say='朋友在國外，<br>交換禮物寄不過去', img='p3', w='p3_w', wpos='left:14px;bottom:14px',
-         nar='轉寄一封兌換碼就送到，<br>他每天<mark>解鎖手機</mark>都會想起你。'),
+         nar='轉寄一封兌換碼就送到，他每天<mark>解鎖手機</mark>都會想起你。'),
     dict(n='04', who='聖誕禮物', say='今年聖誕，<br>也想送自己一份禮物', img='p4', w='p4_w', wpos='right:14px;bottom:14px',
-         nar='一份<mark>每天都會打開</mark>的禮物，<br>陪你走過 2027 的每一天。'),
+         nar='一份<mark>每天都會打開</mark>的禮物，陪你走過 2027 的每一天。'),
 ]
 CAPS6 = ['<small>1 月 1 日</small>這會是美好的一年', '<small>2 月 14 日</small>愛是慢慢散步，慢慢喜歡你',
          '<small>3 月 21 日</small>我祝福我自己，這會是個美好的一年', '<small>9 月 28 日</small>真正的安全感是對自己的信任，允許自己脆弱',
@@ -31,6 +31,7 @@ section{position:relative;background:var(--bg);padding:40px 22px 44px}
 .alt{background:var(--bg2)}
 .eb{font-size:14px;font-weight:500;color:var(--co);letter-spacing:.16em;text-align:center}
 h2{font-weight:500;font-size:28px;line-height:1.44;text-align:center;margin-top:10px;letter-spacing:.02em}
+h2 .h2s{font-size:23.5px;letter-spacing:0}
 h2 .u,.how h3 .u{background:linear-gradient(transparent 62%,rgba(201,109,69,.26) 62%)}
 .lead{font-size:14.5px;line-height:1.8;text-align:center;margin-top:12px;color:var(--gray)}
 mark{color:var(--wine);font-weight:500;background:linear-gradient(transparent 60%,rgba(201,109,69,.2) 60%);padding:0 1px}
@@ -44,7 +45,7 @@ mark{color:var(--wine);font-weight:500;background:linear-gradient(transparent 60
 .ac .pic{position:relative;height:400px;background-size:cover;background-position:center}
 .say{position:absolute;left:14px;top:30px;z-index:2;max-width:250px;padding:11px 16px 12px;border-radius:22px;border-bottom-left-radius:6px;background:rgba(255,255,255,.8);-webkit-backdrop-filter:blur(16px) saturate(1.3);backdrop-filter:blur(16px) saturate(1.3);font-size:18px;line-height:1.45;font-weight:500;box-shadow:0 6px 18px rgba(0,0,0,.14)}
 .ac .wd{position:absolute;width:136px;height:136px;z-index:2;filter:drop-shadow(0 10px 16px rgba(0,0,0,.38))}
-.ac .nar{padding:16px 20px 18px;font-size:15.5px;line-height:1.7}
+.ac .nar{padding:17px 16px 18px;font-size:15.5px;line-height:1.7;white-space:nowrap}
 /* 檔期 */
 #s03b{padding:6px 22px 30px}
 .xm{position:relative;overflow:hidden;background:#B83A35;border-radius:22px;padding:20px 12px 22px;text-align:center;color:#fff;box-shadow:0 10px 24px rgba(120,30,30,.25)}
@@ -144,7 +145,7 @@ mark{color:var(--wine);font-weight:500;background:linear-gradient(transparent 60
 
 def s03():
     h = '''<section id="s03" class="alt"><div class="eb">誰適合手機版煦暖曆？</div>
-<h2>聖誕禮物 x 交換禮物<br><span class="u">送禮送到心坎裡</span></h2>'''
+<h2>聖誕禮物 x 交換禮物<br><span class="u h2s">遠距離好友也能及時收到的聖誕禮物</span></h2>'''
     for x in P:
         wd = f'<img class="wd" src="img/{x["w"]}.png" style="{x["wpos"]}">' if x['w'] else ''
         h += f'''<div class="ac"><div class="tag"><span class="no en">NO.{x['n']}</span>{x['who']}</div>
@@ -245,6 +246,8 @@ def build():
         + how(2, 's06a', '長按 Widget，<br>換一個喜歡的大小', 'iOS 小、中、大三種尺寸，<br>Android 依桌面自由調整比例。', 'c_resize', '換尺寸', 'RESIZE', '長按就能換', 'left:14px;top:14px', 'alt')
         + how(3, 's07', '上班、出差、午休，<br>打開手機就看得到', '不用帶厚厚的紙本，<br>日曆跟著手機去任何地方。', 'c_where', '隨身帶著', 'ANYWHERE', '在哪都看得到', 'right:14px;top:14px')
         + s08() + s09() + s10() + s11() + s12())
+    # 說明句一行放不下就四張一起縮（同一個字級）
+    body += "<script>(()=>{const n=[...document.querySelectorAll('.ac .nar')];let f=15.5;const ok=()=>n.every(e=>e.scrollWidth<=e.clientWidth);while(!ok()&&f>12){f-=.1;n.forEach(e=>e.style.fontSize=f+'px')}document.body.dataset.narfs=f.toFixed(1)})()</script>"
     html = f'<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=432"><title>手機版煦暖曆落地頁 {V}</title><style>{CSS}</style></head><body>{body}</body></html>'
     open(f'{WORK}/page.html', 'w').write(html)
     print('ok')
